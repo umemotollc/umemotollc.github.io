@@ -17,10 +17,12 @@ $(function() {
 	var principal = getParam('principal');
 	var date1 = getParam('from');
 	var date2 = getParam('to');
+	var courtFees = getParam('courtFees');
 	//alert(principal + "\n" + date1 + "\n" + date2);
 	$('#to').val(date2);
     $('#from').val( date1);
 	$('#principal').val(principal);
+	$('#courtFees').val(courtFees);
 	
     $('#from').datepicker({
 		onClose: function(dateText, inst) {
@@ -45,6 +47,11 @@ $(function() {
 			$('#to').val(date2);
 			display(date1, date2);
 	});
+    $('#courtFees').change(function(){
+			$('#from').val(date1);
+			$('#to').val(date2);
+			display(date1, date2);
+	});
 });
 
 
@@ -52,12 +59,13 @@ $(function() {
 function display(date1, date2){
 			var days = getDiff(date1, date2);
 			var principal = $('#principal').val();
-    		$("#days").val(days);
-    		var latePayment = Math.floor(days * principal * 5 / 36500);
+			var courtFees = $('#courtFees').val();
+	    		$("#days").val(days);
+    			var latePayment = Math.floor(days * principal * 5 / 36500);
 			$("#latePayment").val(latePayment);
-			var amountSum = parseInt(principal) + latePayment;
+			var amountSum = parseInt(principal) + parseInt(latePayment) + parseInt(courtFees);
 			$('#amountSum').val(amountSum);
-			var linkURL = $(location).attr('origin') + $(location).attr('pathname') + "?principal=" + principal + "&from=" + date1 + "&to=" + date2;
+			var linkURL = $(location).attr('origin') + $(location).attr('pathname') + "?principal=" + principal + "&from=" + date1 + "&to=" + date2 + "&courtFees=" + courtFees;
 			$('#link').text(linkURL);
 			$('#link2').html('<a href="' + linkURL + '">' + linkURL + '</a>');
 			return;
@@ -103,7 +111,7 @@ function getParam(name, url) {
 
 <body>
 
-<h1>遅延損害金，元本合計の計算</h1>
+<h1>遅延損害金，訴訟費用（手続費用），元本合計の計算</h1>
 <p>（このプログラムは，Javascriptの環境で実行します。）</p>
 
 
@@ -127,7 +135,13 @@ function getParam(name, url) {
 円</p>
 
 
-<p>元本と遅延損害金の合計
+<p>訴訟費用（手続費用）
+<input id="courtFees" type="text" name="訴訟費用" value="" style="text-align: center; "/>
+円</p>
+
+
+
+<p>元本，遅延損害金，訴訟費用の合計
 <input id="amountSum" type="text" name="合計" value="" style="text-align: center; "/>
 円</p>
 
