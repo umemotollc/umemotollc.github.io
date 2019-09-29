@@ -20,10 +20,11 @@ $(function() {
 	var courtFees = getParam('courtFees');
 	//alert(principal + "\n" + date1 + "\n" + date2);
 	$('#to').val(date2);
-    $('#from').val( date1);
+  	$('#from').val( date1);
 	$('#principal').val(principal);
 	$('#courtFees').val(courtFees);
-	
+  	display(date1, date2);
+
     $('#from').datepicker({
 		onClose: function(dateText, inst) {
 			$('#to').datepicker('option', 'minDate',dateText);
