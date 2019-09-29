@@ -115,35 +115,30 @@ function getParam(name, url) {
 <h1>遅延損害金，訴訟費用（手続費用），元本合計の計算</h1>
 <p>（このプログラムは，Javascriptの環境で実行します。）</p>
 
+<p><B>元本，遅延損害金，訴訟費用の合計(支払金額)</B>
+<input id="amountSum" type="text" name="合計" value="" style="text-align: center; "/>
+円</p>
 
-<p>元金
+<P>
+(内訳)
+</P>
+
+<P>元金
 <input id="principal" type="text" name="元金" value="" style="text-align: center; "/>円
 </P>
 
-
-<p>遅延損害金の計算期間
-<input id="from" type="text" name="from" value="">から<input id="to" type="text" name="to"  value="">まで
-</P>
-
-<p>利率 年5パーセント (年365日の日割り計算)</p>
-
-<p>経過日数
-<input id="days" type="text" name="days" value="***" style="text-align: center; "/>日
-</P>
-
-<p>遅延損害金（1円未満切捨て）
+<P>遅延損害金
 <input id="latePayment" type="text" name="遅延損害金" value="" style="text-align: center; "/>
-円</p>
+円（1円未満切捨て。年5パーセント，年365日の日割り計算）</p>
+<P>
+（始期）<input id="from" type="text" name="from" value="">から<BR />
+（終期）<input id="to" type="text" name="to"  value="">まで<br />
+経過日数<input id="days" type="text" name="days" value="" style="text-align: center; "/>日<br />
+支払が遅れる場合は，終期の欄をクリックして，着金する日付に変更してください。</P>
 
 
-<p>訴訟費用（手続費用）
+<P>訴訟費用（手続費用）
 <input id="courtFees" type="text" name="訴訟費用" value="" style="text-align: center; "/>
-円</p>
-
-
-
-<p>元本，遅延損害金，訴訟費用の合計
-<input id="amountSum" type="text" name="合計" value="" style="text-align: center; "/>
 円</p>
 
 <hr />
