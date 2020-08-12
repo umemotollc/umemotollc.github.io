@@ -53,7 +53,7 @@
   (3) 販売等の数量の算定が困難な場合は，商品１種類（型番毎）につき112,000円。  
   (4) 上記各号の金額の合計が112,000円に満たない場合は、112,000円  
 *  販売数量については，例えば，10個セットを２セット販売等した場合は，20個として計算します。
-*  上記３及び５号の112,000円の価額は，ライセンス事務にかかる費用を勘案したものであり，米国の知的財産法(いわゆる Lanham Act)が規定する法定損害賠償額(statutory damages)の最小価額を基準に定めたものです。(15(c) U.S.C. § 1117 https://www.govinfo.gov/content/pkg/USCODE-2011-title15/html/USCODE-2011-title15-chap22-subchapIII-sec1117.htm) 
+*  上記(３)及び(4)の112,000円の価額は，ライセンス事務にかかる費用を勘案したものであり，米国の知的財産法(いわゆる Lanham Act)が規定する法定損害賠償額(statutory damages)の最小価額を基準に定めたものです。(15(c) U.S.C. § 1117 https://www.govinfo.gov/content/pkg/USCODE-2011-title15/html/USCODE-2011-title15-chap22-subchapIII-sec1117.htm) 
 
 ## 2 著作物の使用
   (1) 使用する画像１点につき，掲載したURLごとに20,000円  
