@@ -1,7 +1,6 @@
 # 梅本合同会社からのお知らせ
 
-## 訴訟提起のお知らせ
-* [2019年９月17日 ロボショップ株式会社](lawsuit/20190917-roboshop.md)
 
 ## 契約関係資料
-* [著作物等使用許諾規約](licensing.md)
+* 電子部品関係 [著作物等使用許諾規約](licensing.md)
+* 音楽関係 [作曲委嘱等約款](compositionCommission.md)
