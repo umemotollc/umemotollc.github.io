@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset='utf-8'/>
+<meta name="viewport" content="width=device-width, target-densitydpi=device-dpi, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+<title>Dialer</title>
+<meta property="og:image" content="https://pbs.twimg.com/profile_images/1411234888871661568/F-5gFl4N_400x400.jpg"/>
+<script defer src="util.js"></script><script defer src="help2.js"></script>
+<script>"use strict"
+
+const DTMF = {
+	"1": [ 697, 1209 ],
+	"2": [ 697, 1336 ],
+	"3": [ 697, 1477 ],
+	"A": [ 697, 1633 ],
+	"4": [ 770, 1209 ],
+	"5": [ 770, 1336 ],
+	"6": [ 770, 1477 ],
+	"B": [ 770, 1633 ],
+	"7": [ 852, 1209 ],
+	"8": [ 852, 1336 ],
+	"9": [ 852, 1477 ],
+	"C": [ 852, 1633 ],
+	"*": [ 941, 1209 ],
+	"0": [ 941, 1336 ],
+	"#": [ 941, 1477 ],
+	"D": [ 941, 1633 ]
+}
+
+const startDTMF = function(dtmf) {
+	const len = .2
+
+	const audio = new AudioContext()
+
+	const gain = new GainNode(audio)
+	gain.connect(audio.destination)
+	gain.gain.value = 0.2
+
+	for (let i = 0; i < dtmf.length; i++) {
+		const c = dtmf.charAt(i)
+		const tone = DTMF[c]
+		if (tone) {
+			const start = audio.currentTime
+			for (const t of tone) {
+				const node = new OscillatorNode(audio)
+				node.frequency.value = t
+				node.connect(gain)
+				node.start(start + i * len)
+				node.stop(start + (i + 1) * len)
+			}
+		}
+	}
+}
+
+
+
+window.onload = function() {
+	form.onsubmit = function() {
+		startDTMF(dialer.numbers.value)
+		return false
+	}
+}
+
+</script>
+<style>
+body {
+	margin: 4px;
+	text-align: left;
+}
+
+</style>
+</head>
+<body>
+
+<div id='main'>
+<table border=0 align=center>
+<tr><td align=left>
+<form name='dialer' id="form" >
+<input type="submit" id="1" value="05058579289" onclick="dialer.numbers.value='05058579289'" >ゆうりの曲A<br>
+<input type="submit" id="2" value="05054455448" onclick="dialer.numbers.value='05054455448'">くまちゃん体操第3<br>
+<input type="submit" id="3" value="05054455449" onclick="dialer.numbers.value='05054455449'" >くまちゃんルンバdeサンバ<br>
+<input name="numbers" type="hidden" value="" />
+</form>
+</td></tr>
+</table>
+</div>
+
+<div>固定電話・公衆電話の受話器に近づけて、上のボタンを押してください。
+自動で電話をかけます。<div>携帯電話、IP電話、構内電話、衛星電話、船舶電話などからはご利用いただけません。</div>
+</div>
+
+</body>
+<html>
