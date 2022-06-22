@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html dir="ltr" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title> 遅延損害金，元本合計の計算</title>
+</head>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+<script>
+
+$(function() {
+
+	var principal = getParam('principal');
+	var date1 = getParam('from');
+	var date2 = getParam('to');
+	var courtFees = getParam('courtFees');
+	//alert(principal + "\n" + date1 + "\n" + date2);
+	$('#to').val(date2);
+  	$('#from').val( date1);
+	$('#principal').val(principal);
+	$('#courtFees').val(courtFees);
+  	display(date1, date2);
+
+    $('#from').datepicker({
+		onClose: function(dateText, inst) {
+			$('#to').datepicker('option', 'minDate',dateText);
+			$('#from').val(dateText);
+    		date1 = dateText;
+    		display(date1, date2);
+			//alert(date1);
+			}
+    });
+    $('#to').datepicker({
+		onClose: function(dateText, inst) {
+			$('#from').datepicker('option', 'maxDate', dateText);
+			$('#to').val(dateText);
+			date2 = dateText;
+    		display(date1, date2);
+			//alert(date2);
+			}
+    });
+    $('#principal').change(function(){
+			$('#from').val(date1);
+			$('#to').val(date2);
+			display(date1, date2);
+	});
+    $('#courtFees').change(function(){
+			$('#from').val(date1);
+			$('#to').val(date2);
+			display(date1, date2);
+	});
+});
+
+
+
+function display(date1, date2){
+			var days = getDiff(date1, date2);
+			var principal = $('#principal').val();
+			var courtFees = $('#courtFees').val();
+	    		$("#days").val(days);
+    			var latePayment = Math.floor(days * principal * 3 / 36500);  
+			$("#latePayment").val(latePayment);
+			var amountSum = parseInt(principal) + parseInt(latePayment) + parseInt(courtFees);
+			$('#amountSum').val(amountSum);
+			var linkURL = $(location).attr('origin') + $(location).attr('pathname') + "?principal=" + principal + "&from=" + date1 + "&to=" + date2 + "&courtFees=" + courtFees;
+			$('#link').text(linkURL);
+			$('#link2').html('<a href="' + linkURL + '">' + linkURL + '</a>');
+			return;
+}
+
+
+
+
+
+function getDiff(dateFrom, dateTo) {
+	var date1 = new Date(dateFrom);
+	var date2 = new Date(dateTo);
+
+
+var options = {
+   year    : "numeric", //年の形式
+   month   : "numeric", //月の形式
+   day     : "numeric", //日の形式
+   weekday : "long"   //曜日の形式 
+};
+
+	// 経過時間(mS)
+	var msDiff = date2.getTime() - date1.getTime();
+
+	// 差(mS)を日付に変換
+	var daysDiff = Math.floor(msDiff / (1000 * 60 * 60 *24));
+	return ++daysDiff;  // 初日算入
+}
+
+
+function getParam(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+
+</script>
+
+<body>
+
+<h1>遅延損害金，訴訟費用（手続費用），元本合計の計算</h1>
+<p>（このプログラムは，Javascriptの環境で実行します。）</p>
+
+<p><B>元本，遅延損害金，訴訟費用の合計(支払金額)</B>
+<input id="amountSum" type="text" name="合計" value="" style="text-align: center; "/>
+円</p>
+
+<P>
+(内訳)
+</P>
+
+<P>元金
+<input id="principal" type="text" name="元金" value="" style="text-align: center; "/>円
+</P>
+
+<P>遅延損害金
+<input id="latePayment" type="text" name="遅延損害金" value="" style="text-align: center; "/>
+円（1円未満切捨て。年3パーセント，年365日の日割り計算）</p>
+<P>
+（始期）<input id="from" type="text" name="from" value="">から<BR />
+（終期）<input id="to" type="text" name="to"  value="">まで<br />
+経過日数<input id="days" type="text" name="days" value="" style="text-align: center; "/>日<br />
+支払が遅れる場合は，終期の欄をクリックして，着金する日付に変更してください。</P>
+
+
+<P>訴訟費用（手続費用）
+<input id="courtFees" type="text" name="訴訟費用" value="" style="text-align: center; "/>
+円</p>
+
+<hr />
+<p>この計算式へのリンク
+<textarea id="link" type="text"  name="リンク" >
+</textarea>
+</p>
+<p id=link2> </p>
+
+</body>
+
+
+</html>
