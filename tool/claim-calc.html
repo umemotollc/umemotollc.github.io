@@ -62,7 +62,7 @@ function display(date1, date2){
 			var principal = $('#principal').val();
 			var courtFees = $('#courtFees').val();
 	    		$("#days").val(days);
-    			var latePayment = Math.floor(days * principal * 3 / 36500);  // 年3%の割合による遅延損害金
+    			var latePayment = Math.floor(days * principal * 3 / 36500);  
 			$("#latePayment").val(latePayment);
 			var amountSum = parseInt(principal) + parseInt(latePayment) + parseInt(courtFees);
 			$('#amountSum').val(amountSum);
